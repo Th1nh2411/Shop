@@ -103,14 +103,14 @@ class Validator {
     validate(inputElement, rule) {
         let errorMessage;
         let rulesOfInputE = this.selectorRules[rule.selector]
+        const formElement = $(this.options.form);
 
         // Lặp qua từng rule có lỗi thì break
         for (let ruleOfInput of rulesOfInputE) {
             switch (inputElement.type) {
                 case 'radio':
                 case 'checkbox':
-                    console.log(inputElement.checked)
-                    errorMessage = this.options.form.querySelector(rule.selector + ':checked')
+                    errorMessage = ruleOfInput(formElement.querySelector(rule.selector + ':checked'))
                     break;
                 case 'select-one':
                     let select = $(`${this.options.form} ${rule.selector}`);

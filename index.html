@@ -643,8 +643,8 @@
             </div>
 
             <div class="form__group">
-              <label for="provicce" class="form__label">Chọn vùng</label>
-              <select id="provicce" name="provicce" class="form__control">
+              <label for="province" class="form__label">Chọn vùng</label>
+              <select id="province" name="province" class="form__control">
                 <option value="-- Chọn Tỉnh/Thành Phố">-- Chọn Tỉnh/Thành Phố</option>
                 <option value="Bắc/Hà Nội">Bắc/Hà Nội</option>
                 <option value="Trung/Đà Nẵng">Trung/Đà Nẵng</option>
@@ -660,7 +660,7 @@
               <span class="form__message"></span>
             </div>
             <div class="form__group">
-              <label for="" class="form__label">Giới tính</label>
+              <label for="" class="form__label">Sở thích</label>
               <input value="esports" name="hobby" type="checkbox" class="form__control">Esports
               <input value="volleyball" name="hobby" type="checkbox" class="form__control">Volleyball
               <input value="other" name="hobby" type="checkbox" class="form__control">Khác
@@ -784,6 +784,9 @@
         Validator.isRequired('#form__pw-res', 'Vui lòng nhập mật khẩu'),
         Validator.isRequired('#form__pw-confirm', 'Vui lòng nhập lại mật khẩu'),
         Validator.isRequired('#form__email-res', 'Vui lòng nhập email'),
+        Validator.isRequired('#province'),
+        Validator.isRequired('input[name="gender"]'),
+        Validator.isRequired('input[name="hobby"]'),
         Validator.isEmail('#form__email-res'),
         // Validator.isValidPw('#form__pw-res'),
         Validator.isConfirmed('#form__pw-confirm', function () {
@@ -796,6 +799,7 @@
     })
 
     validate.main()
+    validate.onSubmit
 
   </script>
 </body>
