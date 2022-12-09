@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="./assets/css/base.css" />
   <link rel="stylesheet" href="./assets/css/main.css" />
   <link rel="stylesheet" href="./assets/css/responsive.css" />
-  <script src="assets/js/main.js"></script>
   <link rel="stylesheet" href="assets/fonts/fontawesome-free-6.2.0-web/css/all.min.css" />
   <link rel="stylesheet" href="assets/fonts/themify-icons-font/themify-icons/themify-icons.css" />
   <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.css" />
@@ -629,10 +628,10 @@
             <h3 class="form__heading">Đăng ký</h3>
             <a href="#" class="js-switch-login form__switch-btn">Đăng nhập</a>
           </div>
-          <form id="res-form" action="" method="POST" class="form__form">
+          <form id="reg-form" action="" method="POST" class="form__form">
             <div class="form__group">
-              <Label for="form__email-res" class="form__label">Your email</Label>
-              <input name="email" id="form__email-res" type="email" class="form__input"
+              <Label for="form__email-reg" class="form__label">Your email</Label>
+              <input name="email" id="form__email-reg" type="email" class="form__input"
                 placeholder="eg: email@gmail.com" />
               <span class="form__message"></span>
             </div>
@@ -668,8 +667,8 @@
             </div>
 
             <div class="form__group">
-              <Label for="form__pw-res" class="form__label">Your Password</Label>
-              <input name="'pw" id="form__pw-res" type="password" class="form__input" placeholder="Mật khẩu của bạn" />
+              <Label for="form__pw-reg" class="form__label">Your Password</Label>
+              <input name="pw" id="form__pw-reg" type="password" class="form__input" placeholder="Mật khẩu của bạn" />
               <span class="form__message"></span>
             </div>
             <div class="form__group">
@@ -771,35 +770,51 @@
       </div>
     </div>
   </div>
-
+  <script src="assets/js/main.js"></script>
   <script src="assets/js/vadidator.js"></script>
   <script src="assets/js/modal.js"></script>
   <script>
-    const validate = new Validator({
-      form: '#res-form',
+    const regValidate = new Validator({
+      form: '#reg-form',
       formGroupSelector: '.form__group',
       errorSelector: '.form__message',
       rules: [
+        Validator.isRequired('input[name="email"]', 'Vui lòng nhập email'),
+        Validator.isEmail('input[name="email"]'),
+        Validator.isRequired('input[name="pw"]'),
         Validator.isRequired('#form__name', 'Vui lòng nhập tên đầy đủ'),
-        Validator.isRequired('#form__pw-res', 'Vui lòng nhập mật khẩu'),
         Validator.isRequired('#form__pw-confirm', 'Vui lòng nhập lại mật khẩu'),
-        Validator.isRequired('#form__email-res', 'Vui lòng nhập email'),
         Validator.isRequired('#province'),
         Validator.isRequired('input[name="gender"]'),
         Validator.isRequired('input[name="hobby"]'),
-        Validator.isEmail('#form__email-res'),
-        // Validator.isValidPw('#form__pw-res'),
+        Validator.isValidPw('#form__pw-reg'),
         Validator.isConfirmed('#form__pw-confirm', function () {
-          return document.querySelector("#res-form #form__pw-res").value
+          return document.querySelector("#reg-form #form__pw-reg").value
         }, "Mật khẩu nhập lại không chính xác")
       ],
       onSubmit(data) {
         console.log(data)
       }
     })
+    regValidate.main()
+    regValidate.onSubmit
 
-    validate.main()
-    validate.onSubmit
+    const loginValidate = new Validator({
+      form: '#login-form',
+      formGroupSelector: '.form__group',
+      errorSelector: '.form__message',
+      rules: [
+        Validator.isRequired('input[name="email"]', 'Vui lòng nhập email'),
+        Validator.isEmail('input[name="email"]'),
+        Validator.isRequired('input[name="pw"]'),
+      ],
+      onSubmit(data) {
+        console.log(data)
+      }
+    })
+    loginValidate.main()
+    loginValidate.onSubmit
+
 
   </script>
 </body>
